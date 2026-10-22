@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f6f2;
+  --foreground: #1c1c1c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-canvas: #f7f6f2;
+  --color-surface: #fbfbf8;
+  --color-ink: #1c1c1c;
+  --color-muted: #8a8a86;
+  --color-border: #e4e2da;
+  --color-fill: #eceae4;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+  --shadow-modal: 0 24px 70px rgba(40, 44, 28, 0.16);
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  color: var(--color-ink);
+  background-color: #e7efc4;
+  background-image: linear-gradient(180deg, #f8f7f3 0%, #f3f6ec 46%, #e6eec0 100%);
+  background-attachment: fixed;
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: #e4eec0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+.dialog-panel {
+  width: min(26.5rem, calc(100vw - 2.5rem));
+  max-height: calc(100dvh - 2.5rem);
+  margin: auto;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 1.75rem;
+  padding: 0;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-modal);
+}
+
+.dialog-panel::backdrop {
+  background: rgba(247, 246, 242, 0.72);
+}
+
+.dialog-panel[open] {
+  animation: poemdle-rise 180ms ease;
+}
+
+@keyframes poemdle-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .dialog-panel[open] {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
